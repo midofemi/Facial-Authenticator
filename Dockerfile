@@ -4,6 +4,9 @@ WORKDIR /app
 
 COPY . /app
 
-RUN apt-get update && apt-get install ffmpeg libsm6 libxext6  -y && pip install -r requirements.txt
+RUN apt-get update && \
+    apt-get install -y ffmpeg libsm6 libxext6 && \
+    pip install -r requirements.txt \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 CMD ["python", "app.py"]
